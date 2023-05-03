@@ -1,23 +1,23 @@
 <template>
   <transition name="modal-fade">
-    <div class="modal-backdrop">
+    <div class="xmodal-backdrop">
       <div class="xmodal"
         role="dialog"
         aria-labelledby="modalTitle"
         aria-describedby="modalDescription">
         <header
-          class="modal-header"
+          class="xmodal-header"
           id="modalTitle">
           <slot name="header">
           </slot>
         </header>
         <section
-          class="modal-body"
+          class="xmodal-body"
           id="modalDescription">
           <slot name="body">
           </slot>
         </section>
-        <footer class="modal-footer">
+        <footer class="xmodal-footer">
           <slot name="footer">
 
             <!-- <button
@@ -38,7 +38,7 @@
   </transition>
 </template>
 <style>
-  .modal-backdrop {
+  .xmodal-backdrop {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -58,24 +58,24 @@
     flex-direction: column;
   }
 
-  .modal-header,
-  .modal-footer {
-    padding: 15px;
+  .xmodal-header,
+  .xmodal-footer {
+    padding: 10px;
     display: flex;
   }
 
-  .modal-header {
+  .xmodal-header {
     border-bottom: 1px solid #eeeeee;
     color: #4AAE9B;
     justify-content: space-between;
   }
 
-  .modal-footer {
+  .xmodal-footer {
     border-top: 1px solid #eeeeee;
-    justify-content: flex-end;
+    justify-content: center;
   }
 
-  .modal-body {
+  .xmodal-body {
     position: relative;
     padding: 20px 10px;
   }
@@ -88,7 +88,6 @@
     font-weight: bold;
     color: #319F01;
     background: transparent;
-    left: 80%;
     position: relative;
   }
 

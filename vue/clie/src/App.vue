@@ -174,7 +174,7 @@
       </div>
     </div>
 
-    <ModalSelect
+    <ModalWindow
       v-show="isCitiesModalVisible"
       @close="closeCitiesModal">
       <template v-slot:body>
@@ -184,9 +184,9 @@
           </option>
         </select>
       </template>
-    </ModalSelect>
+    </ModalWindow>
 
-    <ModalSelect
+    <ModalWindow
       v-show="isConsultationModalVisible"
       @close="closeConsultationModal">
       <template v-slot:body>
@@ -194,9 +194,9 @@
           ЗАКАЗАТЬ КОНСУЛЬТАЦИЮ
         </div>
       </template>
-    </ModalSelect>
+    </ModalWindow>
 
-    <ModalSelect
+    <ModalWindow
       v-show="isCallModalVisible"
       @close="closeCallModal">
       <template v-slot:body>
@@ -204,9 +204,9 @@
           ЗАКАЗАТЬ ЗВОНОК
         </div>
       </template>
-    </ModalSelect>
+    </ModalWindow>
 
-    <ModalSelect
+    <ModalWindow
       v-show="isRequestModalVisible"
       @close="closeRequestModal">
       <template v-slot:body>
@@ -214,7 +214,7 @@
           ЗАКАЗАТЬ РАСЧЕТ ЦЕНЫ
         </div>
       </template>
-    </ModalSelect>
+    </ModalWindow>
   </div>
 </template>
 
@@ -226,7 +226,7 @@ import axios from 'axios';
 import MainMenu from '@/components/MainMenu';
 import ActionItem from '@/components/ActionItem';
 import YaMap from '@/components/YaMap';
-import ModalSelect from './components/ModalSelect.vue';
+import ModalWindow from './components/ModalWindow.vue';
 
 import AdvItem from '@/components/AdvItem';
 import WhyItem from '@/components/WhyItem';
@@ -246,7 +246,7 @@ export default {
     AdvItem,
     YaMap,
     WhyItem,
-    ModalSelect,
+    ModalWindow,
     ReviewCard,
     Request
   },
