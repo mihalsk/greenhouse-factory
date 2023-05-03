@@ -219,8 +219,8 @@
 </template>
 
 <script>
-//const host = '127.0.0.1:5000';
-const host = '192.168.1.134:5000';
+const host = '127.0.0.1:5000';
+//const host = '192.168.1.134:5000';
 import axios from 'axios';
 
 import MainMenu from '@/components/MainMenu';
