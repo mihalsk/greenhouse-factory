@@ -1,0 +1,7 @@
+*.zip
+*.exe.lnk
+*.bat
+/heidisql/
+/mysql/
+/mysql-data/
+/vue-export/

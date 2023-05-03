@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Быстрый старт. Размещение интерактивной карты на странице</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=33b9c76b-2c14-43ba-908d-94557e9875f6&lang=ru_RU"></script>
+    <script>
+      // ymaps3.ready.then(init);
+      // function init() {
+      //   const map = new ymaps3.YMap(document.getElementById('map'), {
+      //     location: {
+      //       center: [37.64, 55.76],
+      //       zoom: 7
+      //     }
+      //   });
+      // }
+      ymaps.ready(init);
+      function init(){
+      // Создание карты.
+          var myMap = new ymaps.Map("map", {
+              // Координаты центра карты.
+              // Порядок по умолчанию: «широта, долгота».
+              // Чтобы не определять координаты центра карты вручную,
+              // воспользуйтесь инструментом Определение координат.
+              center: [55.76, 37.64],
+              // Уровень масштабирования. Допустимые значения:
+              // от 0 (весь мир) до 19.
+              zoom: 7
+          });
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="map" style="width: 600px; height: 400px"></div>
+  </body>
+</html>
