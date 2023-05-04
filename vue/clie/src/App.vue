@@ -68,7 +68,7 @@
       <div class="text-center font-weight-bold h3">ВСЕГДА В НАЛИЧИИ</div>
       <div class="d-flex justify-content-center align-items-center flex-row">
         <div class="container row">
-          <Card class="col-md" v-for="good in this.goods" :srcLink="good.photo" :name="good.name" :price="good.price" :measure="'комп.'" :btnText="'Заказать'" v-bind:key="good.id">
+          <Card class="col-md" v-for="good in this.goods.slice(0, 4)" @imgClick="imgClick" :srcLink="good.photo" :name="good.name" :price="good.price" :measure="'комп.'" :btnText="'Заказать'" v-bind:key="good.id">
           </Card>
         </div>
       </div>
@@ -107,10 +107,15 @@
       </div>
     </div>
 
-    <div class="factory w-100 flex-column d-flex justify-content-center align-items-center"><!--слизано с сайта завода-->
+    <div class="factory w-100 flex-column d-flex justify-content-center align-items-center">
       <div class="container column">
         <div class="text-center font-weight-bold h3 col-md">НАШЕ ПРОИЗВОДСТВО</div>
-        <div class="col-md swiper-slide swiper-webkit pswp-slider-child sp-slide sp-slide--youtube not-pswp swiper-slide-active" data-animation="false" data-src="//www.youtube.com/embed/Kemo3dxMUOk" data-code="Kemo3dxMUOk" style="margin-right: 10px;" role="group" aria-label="1 / 10">
+        <video class="col-md" :src="require('@/assets/vid.mp4')" autoplay poster="" controls loop>
+          Извините, Ваш браузер не поддерживает просмотр встроенного видео,
+          но вы можете скачать его по <a :href="require('@/assets/vid.mp4')">ссылке</a>
+          и посмотреть в Вашем плейере!
+        </video>
+        <!-- <div class="col-md swiper-slide swiper-webkit pswp-slider-child sp-slide sp-slide--youtube not-pswp swiper-slide-active" data-animation="false" data-src="//www.youtube.com/embed/Kemo3dxMUOk" data-code="Kemo3dxMUOk" style="margin-right: 10px;" role="group" aria-label="1 / 10">
           <div class="video-item"> 
             <video muted="" loop="" width="100%" height="auto" data-src-desktop="/static/video/Kemo3dxMUOk.mp4?v=1632225019" data-src-mobile="/static/video-mini/Kemo3dxMUOk.mp4?v=1681996243" playsinline="" type="video/mp4" preload="none" class="sp-video-instructions sp-video swiper-lazy swiper-lazy-img swiper-lazy-loaded" src="/static/video/Kemo3dxMUOk.mp4?v=1632225019" style="display: none;"> 
             </video> 
@@ -118,12 +123,11 @@
 
             </iframe>
           </div>  
-        </div>
+        </div> -->
       </div>
     </div>
 
     <div ref="request" class="request w-100 flex-column d-flex justify-content-center align-items-center">
-      <!-- <div class="text-center font-weight-bold h3">ЗАПРОС СТОИМОСТИ</div> -->
       <div class="container row flex-row-reverse">
         <Request class="col-md-4 p-2" @action="showRequestModal"></Request>
       </div>
@@ -145,7 +149,7 @@
       <div class="text-center font-weight-bold h3">ОТЗЫВЫ КЛИЕНТОВ</div>
       <div class="container row">
         <div class="col-md-2 d-none d-md-flex"></div>
-        <ReviewCard class="col-md" v-for="review in this.reviews" :srcLink="review.photo" :text="review.text" :name="review.Author_name" v-bind:key="review.id">
+        <ReviewCard class="col-md" v-for="review in this.reviews.slice(0, 3)" :srcLink="review.photo" :text="review.text" :name="review.Author_name" v-bind:key="review.id">
         </ReviewCard>
         <div class="col-md-2 d-none d-md-flex"></div>
       </div>
@@ -154,16 +158,15 @@
     <div class="map w-100 row d-flex justify-content-center align-items-center">
       <div class="container-fluid column">
         <div class="col-md text-center font-weight-bold h3">МЫ НА КАРТЕ</div>
-        <YaMap className="col-md yaa" cssStyle="" :coords="this.coords"></YaMap>
+        <YaMap className="col-md yaa" cssStyle="" :city="this.city == null ? null : this.city"></YaMap>
       </div>
-      
     </div>
 
     <div class="footer w-100 row d-flex justify-content-center align-items-center">
       <div class="container row flex-nowrap">
         <div id="brand" class="col-md-2"><img src="@/assets/Logo 1.svg"/></div>
-        <div class="col-md-5 d-none d-md-block"></div>
-        <div class="col-md-2 d-none d-md-flex h6 font-weight-bold justify-content-center container row ">
+        <div class="col-md-4 d-none d-md-block"></div>
+        <div class="col-md-3 d-none d-md-flex h6 font-weight-bold justify-content-center container row ">
           <img class="img" :src="require('@/assets/map-marker.svg')"/>
           <div class="align-self-center">{{ this.city == null ? '' : this.city.name }}</div>
         </div>
@@ -215,6 +218,18 @@
         </div>
       </template>
     </ModalWindow>
+
+    <ModalWindow
+      v-show="isPreviewModalVisible"
+      @close="closePreviewModal">
+      <template v-slot:body>
+        <div class="w-75 container">
+          <div class="row justify-content-center">
+            <img class="col-md align-self-center" :src='`${currentPreviewSrc !== "" ? currentPreviewSrc : "/static/not-found.jpg"}`'>
+          </div>
+        </div>
+      </template>
+    </ModalWindow>
   </div>
 </template>
 
@@ -262,7 +277,6 @@ export default {
       .then(response => {
         this.cities = response.data;
         this.city = this.cities.filter(obj => { return obj.id === this.cityid })[0];
-        this.coords = this.city.coords.match(/(\d{1,2}\.\d{1,4})/g);
       })
       // .then()
       .catch(error => {
@@ -303,12 +317,14 @@ export default {
       isConsultationModalVisible: false, 
       isCallModalVisible: false, 
       isRequestModalVisible: false,
+      isPreviewModalVisible: false,
       coords: [55.8304, 49.0661], 
       city: null,
       cityid: 1, 
       cities: [],
       goods: [],
-      reviews: []
+      reviews: [],
+      currentPreviewSrc: "",
     };
   },
   watch: {
@@ -316,44 +332,56 @@ export default {
       if (this.cities && newId) {
         this.city = this.cities.filter(obj => {
                                 return obj.id == newId
-                              })[0];
-        
-        let regexp = /(\d{1,2}\.\d{1,4})/g;
-        this.coords = this.city.coords.match(regexp); 
+                              })[0]; 
       }
     },
     cities(cities, oldCities) {
-      const results = cities;
-      this.city = results.filter(obj => { return obj.id === this.cityid })[0];
-      this.coords = this.city.coords.match(/(\d{1,2}\.\d{1,4})/g);
+      // const results = cities;
+      this.city = cities.filter(obj => { return obj.id === this.cityid })[0];
     },
   },
   methods: {
     showCitiesModal(event) {
       this.isCitiesModalVisible = true;
     },
-    showConsultationModal(event) {
-      this.isConsultationModalVisible = true;
-    },
-    showCallModal(event) {
-      this.isCallModalVisible = true;
-    },
-    showRequestModal(event) {
-      this.isRequestModalVisible = true;
-    },
     closeCitiesModal() {
       this.isCitiesModalVisible = false;
+    },
+
+    showConsultationModal(event) {
+      this.isConsultationModalVisible = true;
     },
     closeConsultationModal() {
       this.isConsultationModalVisible = false;
     },
+
+    showCallModal(event) {
+      this.isCallModalVisible = true;
+    },
     closeCallModal() {
       this.isCallModalVisible = false;
+    },
+
+    showRequestModal(event) {
+      this.isRequestModalVisible = true;
     },
     closeRequestModal() {
       this.isRequestModalVisible = false;
     },
 
+    showPreviewModal(event) {
+      this.isPreviewModalVisible = true;
+    },
+    closePreviewModal(event) {
+      this.isPreviewModalVisible = false;
+    },
+
+
+    imgClick(src) {
+      console.log(src);
+      this.currentPreviewSrc = `/static/${src.replace('T-crab','T-crab@2x')}`; // ;-(
+      this.isPreviewModalVisible = true;
+    },
   }
 };
 </script>

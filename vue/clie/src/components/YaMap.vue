@@ -17,6 +17,7 @@
 </style>
 <script>
 var myMap = null;
+var myPlacemark = null;
 export default {
     props: {
         className: {
@@ -42,22 +43,35 @@ export default {
             },
             type: Array
         },
-        
+        city: {
+            required: false,
+            type: Object
+        },
     },
     watch: { 
-        coords: function(newVal, oldVal) { // watch it
-            myMap.setCenter(newVal, 7, {
-                checkZoomRange: true
-            });
+        city: function(newVal, oldVal) { // watch it
+            if (newVal !== null && myMap !== null){
+                var tcoords = newVal.coords.match(/(\d{1,2}\.\d{1,4})/g);
+                console.log(tcoords);
+                myMap.setCenter(tcoords, 7, {
+                    checkZoomRange: true
+                });
+                myPlacemark = new ymaps.Placemark(tcoords, {
+                    balloonContentHeader: "Офис",
+                    balloonContentBody: `${newVal.name}`,
+                    balloonContentFooter: `${newVal.phone}`,
+                    hintContent: `Офис ${newVal.name}`
+                });
+                myMap.geoObjects.add(myPlacemark);
+            }
         }
     },
     mounted() {
-        console.log(this.coords);
-        var tc = this.coords;
+        var ycoords = this.city == null ? [37.64, 55.761] : this.city.coords;
         ymaps.ready(init);
         function init(){
             myMap = new ymaps.Map("ym-map", {
-                center: tc,
+                center: ycoords,
                 zoom: 7
             });
         }

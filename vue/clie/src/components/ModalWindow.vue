@@ -1,6 +1,6 @@
 <template>
   <transition name="modal-fade">
-    <div class="xmodal-backdrop">
+    <div class="xmodal-backdrop" @click="closeBackdropClick">
       <div class="xmodal"
         role="dialog"
         aria-labelledby="modalTitle"
@@ -11,12 +11,12 @@
           <slot name="header">
           </slot>
         </header>
-        <section
-          class="xmodal-body"
+        <div
+          class="xmodal-body container justify-content-center"
           id="modalDescription">
           <slot name="body">
           </slot>
-        </section>
+        </div>
         <footer class="xmodal-footer">
           <slot name="footer">
 
@@ -78,6 +78,7 @@
   .xmodal-body {
     position: relative;
     padding: 20px 10px;
+    justify-content: center;
   }
 
   .btn-close {
@@ -117,6 +118,11 @@ import Btn from '@/components/Btn';
     methods: {
       close() {
         this.$emit('close');
+      },
+      closeBackdropClick(e) {
+        if (e.target.classList.contains('xmodal-backdrop')){
+          this.$emit('close');
+        }
       },
     },
   };

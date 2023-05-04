@@ -2,7 +2,7 @@
   <div class="w-100 flex-row d-flex justify-content-center align-items-center">
     <header class="w-100 container row">
       <div id="brand" class="col-md"><img src="@/assets/Logo 1.svg"/></div>
-      <nav class="col-md-9 d-none d-md-flex row">
+      <nav class="col-md-10 d-none d-md-flex row">
         <ul class="align-self-start">
           <li><a @click="goto('catalog')">Каталог</a></li>
           <li><a @click="goto('request')">Расчет стоимости</a></li>

@@ -2,7 +2,7 @@
   <div class="div d-flex justify-content-center align-items-center flex-column"
     :class="className">
     <!-- <div class="container column div"> -->
-      <img class="c-img" :src="require(`../assets/${srcLink}`)" @error="replaceByDefault">
+      <img @click="imgClick" class="c-img" :src="`/static/${srcLink}`" @error="replaceByDefault">
       <div class="d-flex flex-column p-2">
         <div class="container row justify-content-start">
           <div class="col p-1">{{ name }}</div>
@@ -62,15 +62,11 @@ export default {
   },
   methods: {
     replaceByDefault(e) {
-      // e.target.src = img;
-      console.log(e);
-      //e.target.src = require('@/assets/not-found.jpg');
+      e.target.src = require('../assets/not-found.jpg');
     },
-    replaceByDefault() {
-      // e.target.src = img;
-      console.log(e);
-      //e.target.src = require('@/assets/not-found.jpg');
-    }
+    imgClick() {
+      this.$emit('imgClick', this.srcLink);
+    },
   },
 }
 </script>
