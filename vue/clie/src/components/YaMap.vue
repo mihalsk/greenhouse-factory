@@ -21,8 +21,8 @@ var myPlacemark = null;
 export default {
     props: {
         className: {
-        required: false,
-        type: String
+            required: false,
+            type: String
         },
         width: {
             required: false,
@@ -49,25 +49,30 @@ export default {
         },
     },
     watch: { 
-        city: function(newVal, oldVal) { // watch it
-            if (newVal !== null && myMap !== null){
-                var tcoords = newVal.coords.match(/(\d{1,2}\.\d{1,4})/g);
-                console.log(tcoords);
-                myMap.setCenter(tcoords, 7, {
-                    checkZoomRange: true
-                });
-                myPlacemark = new ymaps.Placemark(tcoords, {
-                    balloonContentHeader: "Офис",
-                    balloonContentBody: `${newVal.name}`,
-                    balloonContentFooter: `${newVal.phone}`,
-                    hintContent: `Офис ${newVal.name}`
-                });
-                myMap.geoObjects.add(myPlacemark);
+        city: {
+            immediate: true,
+            deep: true,
+            handler(newVal, oldVal) { // watch it
+                console.log(111, newVal, myMap);
+                if (newVal !== null && myMap !== null){
+                    var tcoords = newVal.coords.match(/(\d{1,2}\.\d{1,4})/g);
+                    console.log(tcoords);
+                    myMap.setCenter(tcoords, 7, {
+                        checkZoomRange: true
+                    });
+                    myPlacemark = new ymaps.Placemark(tcoords, {
+                        balloonContentHeader: "Офис",
+                        balloonContentBody: `${newVal.name}`,
+                        balloonContentFooter: `${newVal.phone}`,
+                        hintContent: `Офис ${newVal.name}`
+                    });
+                    myMap.geoObjects.add(myPlacemark);
+                }
             }
         }
     },
-    mounted() {
-        var ycoords = this.city == null ? [37.64, 55.761] : this.city.coords;
+    created() {
+        var ycoords = this.city === null ? [37.64, 55.761] : this.city.coords;
         ymaps.ready(init);
         function init(){
             myMap = new ymaps.Map("ym-map", {

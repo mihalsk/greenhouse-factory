@@ -1,13 +1,15 @@
 <template>
-    <div class="div d-flex justify-content-start align-items-center flex-column p-2"
+    <div class="div d-flex justify-content-start align-items-center flex-md-column flex-row p-2"
       :class="className">
-        <img class="c-img" :src="require(`../assets/${srcLink}`)" 
+        <img class="c-img align-self-start align-self-md-center p-2" :src="require(`../assets/${srcLink}`)" 
                 @error="$event.target.src = require('../assets/not-found.jpg')"/>
-        <div class="p-1 font-weight-bold h3">{{ name }}</div>
-        <div class="d-flex flex-column p-2">
-            <div class="container row justify-content-start">
-            <div class="col p-1">{{ text }}</div>
-            </div>
+        <div class="d-flex justify-content-md-center flex-column">
+          <div class="d-flex p-1 font-weight-bold h3 justify-content-md-center">{{ name }}</div>
+          <div class="d-flex flex-column p-2">
+              <div class="container row justify-content-start">
+              <div class="col p-1">{{ text }}</div>
+              </div>
+          </div>
         </div>
     </div>
   </template>
@@ -47,36 +49,12 @@
     height: auto;
     border-radius: 3px 3px 0 0;
   }
-  .btn {
-    box-sizing: border-box;
-  
-    /* Auto layout */
-  
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 3px 24px;
-    gap: 10px;
-    width: 60%;
-    border: 1px solid #000000;
-    border-radius: 3px;
-  }
-  .inp, .form {
-    /* box-sizing: border-box;
-     */
-    width: 100%;
-    border: 0.5px solid #C9C9C9;
-    border-radius: 3px;
-    padding: 0;
-    margin: 0;
-    text-align: center;
-  }
-  
-  .price {
-    font-size: small;
-  }
-  .cnt {
-    font-size: x-small;
+
+  @media only screen and (max-width: 768px) {
+    .c-img {
+      width: 5em;
+      height: auto;
+      border-radius: 3px 3px 0 0;
+    }
   }
   </style>

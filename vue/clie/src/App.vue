@@ -110,7 +110,7 @@
     <div class="factory w-100 flex-column d-flex justify-content-center align-items-center">
       <div class="container column">
         <div class="text-center font-weight-bold h3 col-md">НАШЕ ПРОИЗВОДСТВО</div>
-        <video class="col-md" :src="require('@/assets/vid.mp4')" autoplay poster="" controls loop>
+        <video class="col-md" :src="require('@/assets/vid.mp4')" poster='@/assets/rectangle-1.png' controls loop>
           Извините, Ваш браузер не поддерживает просмотр встроенного видео,
           но вы можете скачать его по <a :href="require('@/assets/vid.mp4')">ссылке</a>
           и посмотреть в Вашем плейере!
@@ -136,12 +136,12 @@
     <div ref="partners" class="partners w-100 flex-column d-flex justify-content-center align-items-center">
       <div class="text-center font-weight-bold h3">НАШИ ПАРТНЁРЫ</div>
       <div class="container row  align-items-center">
-        <img class="plogo col-md c-img" :src="require('@/assets/15efa96f4377a473c718553f02721b59 1.png')" 
-              @error="$event.target.src = require('@/assets/not-found.jpg')"/>
-        <img class="plogo col-md c-img" :src="require('@/assets/Лого_старый шрифт 1.png')" 
-              @error="$event.target.src = require('@/assets/not-found.jpg')"/>
-        <img class="plogo col-md c-img" :src="require('@/assets/logo_gf1 1.png')" 
-              @error="$event.target.src = require('@/assets/not-found.jpg')"/>
+        <img class="plogo col-md c-img" src='@/assets/15efa96f4377a473c718553f02721b59 1.png' 
+              @error="$event.target.src = '@/assets/not-found.jpg'"/>
+        <img class="plogo col-md c-img" src='@/assets/Лого_старый шрифт 1.png' 
+              @error="$event.target.src = '@/assets/not-found.jpg'"/>
+        <img class="plogo col-md c-img" src='@/assets/logo_gf1 1.png' 
+              @error="$event.target.src = '@/assets/not-found.jpg'"/>
       </div>
     </div>
 
@@ -158,7 +158,7 @@
     <div class="map w-100 row d-flex justify-content-center align-items-center">
       <div class="container-fluid column">
         <div class="col-md text-center font-weight-bold h3">МЫ НА КАРТЕ</div>
-        <YaMap className="col-md yaa" cssStyle="" :city="this.city == null ? null : this.city"></YaMap>
+        <YaMap className="col-md yaa" cssStyle="" :city="city"></YaMap>
       </div>
     </div>
 
@@ -265,20 +265,14 @@ export default {
     ReviewCard,
     Request
   },
-  beforeCreate(){
-
-  },
-  mounted() {
-    
-  },
   created() {
     axios
       .get(`http://${host}/cities`)
       .then(response => {
         this.cities = response.data;
         this.city = this.cities.filter(obj => { return obj.id === this.cityid })[0];
+        console.log(this.city);
       })
-      // .then()
       .catch(error => {
         console.log(error);
         this.citiesErrored = true;
@@ -290,7 +284,6 @@ export default {
       .then(response => {
         this.goods = response.data;
       })
-      // .then()
       .catch(error => {
         console.log(error);
         this.goodsErrored = true;
@@ -302,14 +295,17 @@ export default {
       .then(response => {
         this.reviews = response.data;
       })
-      // .then()
       .catch(error => {
         console.log(error);
         this.reviewsErrored = true;
       })
       .finally(() => (this.reviewsLoading = false));
   },
-  props: {
+  mounted() {
+    // if (this.cities.length > 0) {
+    //   this.city = this.cities.filter(obj => { return obj.id === this.cityid })[0];
+    //   console.log(this.city);
+    // }
   },
   data () {
     return { 
@@ -331,13 +327,12 @@ export default {
     cityid(newId, oldId) {
       if (this.cities && newId) {
         this.city = this.cities.filter(obj => {
-                                return obj.id == newId
-                              })[0]; 
+                                return obj.id === newId
+                              })[0];
       }
     },
-    cities(cities, oldCities) {
-      // const results = cities;
-      this.city = cities.filter(obj => { return obj.id === this.cityid })[0];
+    cities(newCities, oldCities) {
+      this.city = newCities.filter(obj => { return obj.id === this.cityid })[0];
     },
   },
   methods: {
