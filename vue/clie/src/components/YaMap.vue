@@ -45,8 +45,12 @@ export default {
         },
         city: {
             required: false,
+            default() {
+                return null
+            },
             type: Object
         },
+        
     },
     watch: { 
         city: {
@@ -55,12 +59,11 @@ export default {
             handler(newVal, oldVal) { // watch it
                 console.log(111, newVal, myMap);
                 if (newVal !== null && myMap !== null){
-                    var tcoords = newVal.coords.match(/(\d{1,2}\.\d{1,4})/g);
-                    console.log(tcoords);
-                    myMap.setCenter(tcoords, 7, {
+                    var coords = newVal.coords.match(/(\d{1,2}\.\d{1,4})/g);
+                    myMap.setCenter(coords, 7, {
                         checkZoomRange: true
                     });
-                    myPlacemark = new ymaps.Placemark(tcoords, {
+                    myPlacemark = new ymaps.Placemark(coords, {
                         balloonContentHeader: "Офис",
                         balloonContentBody: `${newVal.name}`,
                         balloonContentFooter: `${newVal.phone}`,
@@ -71,15 +74,27 @@ export default {
             }
         }
     },
-    created() {
-        var ycoords = this.city === null ? [37.64, 55.761] : this.city.coords;
-        ymaps.ready(init);
-        function init(){
+    methods: {
+        init() {
+            console.log(777);
+            var coords = this.city === null ? [55.7558, 37.6173] : this.city.coords.match(/(\d{1,2}\.\d{1,4})/g);
             myMap = new ymaps.Map("ym-map", {
-                center: ycoords,
+                center: coords,
                 zoom: 7
             });
-        }
+            if (this.city !== null) {
+                myPlacemark = new ymaps.Placemark(coords, {
+                    balloonContentHeader: "Офис",
+                    balloonContentBody: `${this.city.name}`,
+                    balloonContentFooter: `${this.city.phone}`,
+                    hintContent: `Офис ${this.city.name}`
+                });
+                myMap.geoObjects.add(myPlacemark);
+            }
+        },
+    },
+    created() {
+        ymaps.ready(this.init);
     },
 }
 </script>

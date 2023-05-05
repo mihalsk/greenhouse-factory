@@ -316,7 +316,7 @@ export default {
       isPreviewModalVisible: false,
       coords: [55.8304, 49.0661], 
       city: null,
-      cityid: 1, 
+      cityid: 2, 
       cities: [],
       goods: [],
       reviews: [],
