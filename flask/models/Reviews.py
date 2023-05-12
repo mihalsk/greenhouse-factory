@@ -5,7 +5,7 @@ from models.BaseModel import BaseModel
 
 
 class Reviews(BaseModel):
-    __tablename__ = 'Review'
+    __tablename__ = 'reviews'
     Author_name: Mapped[str] = mapped_column(String(255), nullable=False)
     text: Mapped[Text] = mapped_column(Text, nullable=False)
     photo: Mapped[str] = mapped_column(String(255))

@@ -16,7 +16,7 @@ DEBUG = True
 db = SQLAlchemy()
 app = Flask(__name__)
 app.json = CommonJSONProvider(app)
-engine = create_engine('mysql+pymysql://root:52588083@localhost/zgtdb?charset=utf8mb4')
+engine = create_engine('mysql+pymysql://mihal:12345@db/zgtdb?charset=utf8mb4')
 sm = sessionmaker(bind=engine)
 # enable CORS
 CORS(app)
@@ -28,13 +28,13 @@ def db_session(sessionmaker_obj):
     try:
         db_session = scoped_session(sessionmaker_obj)
         yield db_session
-        #db_session.commit()
+        # db_session.commit()
         db_session.flush()
-    except:
-        print(f"exception in session ${db_session}")
+    except Exception as e:
+        print(f"exception in session {db_session} {str(e)}")
         db_session.rollback()
     finally:
-        print(f"close session ${db_session}")
+        print(f"close session {db_session}")
         db_session.close()
 
 

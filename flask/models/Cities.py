@@ -4,7 +4,7 @@ from models.BaseModel import BaseModel
 
 
 class Cities(BaseModel):
-    __tablename__ = 'Cities'
+    __tablename__ = 'cities'
     name: Mapped[str] = mapped_column(String(255), nullable=False)
     phone: Mapped[str] = mapped_column(String(255), nullable=False)
     coords: Mapped[str] = mapped_column(String(255))

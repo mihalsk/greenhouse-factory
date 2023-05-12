@@ -135,13 +135,15 @@
 
     <div ref="partners" class="partners w-100 flex-column d-flex justify-content-center align-items-center">
       <div class="text-center font-weight-bold h3">НАШИ ПАРТНЁРЫ</div>
-      <div class="container row  align-items-center">
-        <img class="plogo col-md c-img" src='@/assets/15efa96f4377a473c718553f02721b59 1.png' 
-              @error="$event.target.src = '@/assets/not-found.jpg'"/>
-        <img class="plogo col-md c-img" src='@/assets/Лого_старый шрифт 1.png' 
-              @error="$event.target.src = '@/assets/not-found.jpg'"/>
-        <img class="plogo col-md c-img" src='@/assets/logo_gf1 1.png' 
-              @error="$event.target.src = '@/assets/not-found.jpg'"/>
+      <div class="container align-items-center">
+        <div class="row">
+          <img class="col-md-4" src='@/assets/15efa96f4377a473c718553f02721b59 1.png' 
+                @error="$event.target.src = '@/assets/not-found.jpg'"/>
+          <img class="col-md-4" src='@/assets/Лого_старый шрифт 1.png' 
+                @error="$event.target.src = '@/assets/not-found.jpg'"/>
+          <img class="col-md-4" src='@/assets/logo_gf1 1.png' 
+                @error="$event.target.src = '@/assets/not-found.jpg'"/>
+        </div>
       </div>
     </div>
 
@@ -234,8 +236,8 @@
 </template>
 
 <script>
-const host = '127.0.0.1:5000';
-//const host = '192.168.1.134:5000';
+const host = 'localhost:8000';
+//const host = 'api:5000';
 import axios from 'axios';
 
 import MainMenu from '@/components/MainMenu';

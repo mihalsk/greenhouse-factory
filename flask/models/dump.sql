@@ -64,8 +64,8 @@ INSERT INTO `goods` (`id`, `name`, `price`, `photo`, `count`, `created`, `update
 	(5, 'Дюбель', 0.75, 'dowel.jpg', 1000, '2023-04-24 13:55:11', '2023-04-24 13:55:11', 1),
 	(6, 'Уголок металлический', 2.00, 'corner.jpg', 500, '2023-04-24 13:55:11', '2023-04-24 13:55:11', 1);
 
--- Дамп структуры для таблица zgtdb.review
-CREATE TABLE IF NOT EXISTS `review` (
+-- Дамп структуры для таблица zgtdb.reviews
+CREATE TABLE IF NOT EXISTS `reviews` (
   `id` int NOT NULL AUTO_INCREMENT,
   `Author_name` varchar(255) NOT NULL,
   `text` text NOT NULL,
@@ -77,8 +77,8 @@ CREATE TABLE IF NOT EXISTS `review` (
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 
--- Дамп данных таблицы zgtdb.review: ~3 rows (приблизительно)
-INSERT INTO `review` (`id`, `Author_name`, `text`, `photo`, `created`, `updated`, `is_active`) VALUES
+-- Дамп данных таблицы zgtdb.reviews: ~3 rows (приблизительно)
+INSERT INTO `reviews` (`id`, `Author_name`, `text`, `photo`, `created`, `updated`, `is_active`) VALUES
 	(1, 'Василий', 'Купили теплицу на этом заводе. Очень довольны качеством и ценой. Спасибо!', 'ellipse-1@2x.png', '2023-04-24 13:55:11', '2023-04-24 13:55:11', 1),
 	(2, 'Анна', 'Заказывали установку теплицы на даче. Работа выполнена быстро и качественно.', 'ellipse-1-1@2x.png', '2023-04-24 13:55:11', '2023-04-24 13:55:11', 1),
 	(3, 'Егор', 'Приобрели теплицу для дачи на этом заводе. Консультанты помогли выбрать подходящую модель и ответили на все вопросы.', 'ellipse-1-2@2x.png', '2023-04-24 13:55:11', '2023-04-24 13:55:11', 1);

@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:latest
+    volumes:
+      - ./flask/models:/docker-entrypoint-initdb.d
+    restart: always
+    environment:
+      - MYSQL_USER=mihal
+      - MYSQL_PASSWORD=12345
+      - MYSQL_ROOT_PASSWORD=12345
+      - MYSQL_DATABASE=zgtdb
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+
+  api:
+    build: ./flask
+    container_name: flask
+    restart: always
+    volumes:
+      - ./flask/:/app
+    expose:
+      - 5000
+
+  ui:
+    build: ./vue/clie
+    container_name: clie
+    restart: always
+    expose:
+      - 80
+
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    restart: always
+    ports:
+      - "8000:8000"
+      - "8080:80"
