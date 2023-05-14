@@ -1,5 +1,5 @@
-# ready-made-greenhouse-plant-factory
-завод готовых теплиц
+# "Ready-made greenhouse plant factory" SPA 
+"Завод готовых теплиц" SPA
 
 SPA port 8080<br/>
 Rest API port 8000
