@@ -1,7 +1,7 @@
 # ready-made-greenhouse-plant-factory
 завод готовых теплиц
 
-SPA port 8080
+SPA port 8080<br/>
 Rest API port 8000
 
 В App.vue(/vue/clie/src/) поменять "localhost" в строке 239:<br/>
