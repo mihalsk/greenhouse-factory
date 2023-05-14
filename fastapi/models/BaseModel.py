@@ -1,7 +1,7 @@
 from peewee import MySQLDatabase, Model, IntegerField, DateTimeField, BooleanField, SQL
 
-mysql_db = MySQLDatabase('zgtdb', user='root', password='52588083',
-                         host='127.0.0.1', port=3306, charset='utf8mb4')
+mysql_db = MySQLDatabase('zgtdb', user='mihal', password='12345',
+                         host='db', port=3306, charset='utf8mb4')
 
 
 class BaseModel(Model):

@@ -272,6 +272,7 @@ export default {
     Request
   },
   created() {
+    axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
     axios
       .get(`http://${host}/cities`)
       .then(response => {
