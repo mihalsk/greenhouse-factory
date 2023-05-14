@@ -27,17 +27,17 @@ async def root():
 
 @app.get("/cities")
 async def cities_list():
-    query = Cities.select().where(Cities.is_active).dicts()
-    return JSONResponse(content=jsonable_encoder(list(query)))
+    query_result = Cities.select().where(Cities.is_active).dicts()
+    return JSONResponse(content=jsonable_encoder(list(query_result)))
 
 
 @app.get("/goods")
 async def goods_list():
-    query = Goods.select().where(Goods.is_active).dicts()
-    return JSONResponse(content=jsonable_encoder(list(query)))
+    query_result = Goods.select().where(Goods.is_active).dicts()
+    return JSONResponse(content=jsonable_encoder(list(query_result)))
 
 
 @app.get("/reviews")
 async def reviews_list():
-    query = Reviews.select().where(Reviews.is_active).dicts()
-    return JSONResponse(content=jsonable_encoder(list(query)))
+    query_result = Reviews.select().where(Reviews.is_active).dicts()
+    return JSONResponse(content=jsonable_encoder(list(query_result)))

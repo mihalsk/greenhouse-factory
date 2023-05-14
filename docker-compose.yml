@@ -13,15 +13,23 @@ services:
       - MYSQL_DATABASE=zgtdb
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
 
-  api:
-    build: ./flask
-    container_name: flask
+  # api:
+    # build: ./flask
+    # container_name: flask
+    # restart: always
+    # volumes:
+      # - ./flask/:/app
+    # expose:
+      # - 5000
+	  
+  fastapi:
+    build: ./fastapi
+    container_name: fastapi
     restart: always
     volumes:
-      - ./flask/:/app
+      - ./fastapi/:/app
     expose:
       - 5000
-
   ui:
     build: ./vue/clie
     container_name: clie
@@ -34,5 +42,6 @@ services:
     container_name: nginx
     restart: always
     ports:
-      - "8000:8000"
+      # - "8000:8000"
+	  - "8000:8001"
       - "8080:80"
