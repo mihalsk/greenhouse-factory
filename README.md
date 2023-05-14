@@ -1,6 +1,9 @@
 # ready-made-greenhouse-plant-factory
 завод готовых теплиц
 
+SPA port 8080
+Rest API port 8000
+
 В App.vue(/vue/clie/src/) поменять "localhost" в строке 239:<br/>
 <i>const host = 'localhost:8000';</i><br/>
 на свой ip адрес хоста Docker.<br/>
