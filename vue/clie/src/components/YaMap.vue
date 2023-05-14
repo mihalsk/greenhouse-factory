@@ -56,8 +56,7 @@ export default {
         city: {
             immediate: true,
             deep: true,
-            handler(newVal, oldVal) { // watch it
-                console.log(111, newVal, myMap);
+            handler(newVal, oldVal) { 
                 if (newVal !== null && myMap !== null){
                     var coords = newVal.coords.match(/(\d{1,2}\.\d{1,4})/g);
                     myMap.setCenter(coords, 7, {
@@ -76,7 +75,6 @@ export default {
     },
     methods: {
         init() {
-            console.log(777);
             var coords = this.city === null ? [55.7558, 37.6173] : this.city.coords.match(/(\d{1,2}\.\d{1,4})/g);
             myMap = new ymaps.Map("ym-map", {
                 center: coords,

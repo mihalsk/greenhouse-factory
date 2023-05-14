@@ -238,7 +238,9 @@
 <script>
 const host = 'localhost:8000';
 //const host = 'api:5000';
+import Vue from 'vue'
 import axios from 'axios';
+import VueCookies from 'vue-cookies';
 
 import MainMenu from '@/components/MainMenu';
 import ActionItem from '@/components/ActionItem';
@@ -252,6 +254,8 @@ import Btn from '@/components/Btn';
 import Card from '@/components/Card';
 import ReviewCard from '@/components/ReviewCard';
 import Request from '@/components/Request';
+
+Vue.use(VueCookies);
 
 export default {
   name: 'App',
@@ -273,7 +277,6 @@ export default {
       .then(response => {
         this.cities = response.data;
         this.city = this.cities.filter(obj => { return obj.id === this.cityid })[0];
-        console.log(this.city);
       })
       .catch(error => {
         console.log(error);
@@ -302,12 +305,10 @@ export default {
         this.reviewsErrored = true;
       })
       .finally(() => (this.reviewsLoading = false));
+      if (this.$cookies.isKey("cityid"))
+        this.cityid = Number(this.$cookies.get("cityid"));
   },
   mounted() {
-    // if (this.cities.length > 0) {
-    //   this.city = this.cities.filter(obj => { return obj.id === this.cityid })[0];
-    //   console.log(this.city);
-    // }
   },
   data () {
     return { 
@@ -331,6 +332,7 @@ export default {
         this.city = this.cities.filter(obj => {
                                 return obj.id === newId
                               })[0];
+        this.$cookies.set("cityid", newId);
       }
     },
     cities(newCities, oldCities) {
@@ -375,7 +377,6 @@ export default {
 
 
     imgClick(src) {
-      console.log(src);
       this.currentPreviewSrc = `/static/${src.replace('T-crab','T-crab@2x')}`; // ;-(
       this.isPreviewModalVisible = true;
     },
