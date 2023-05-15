@@ -136,7 +136,7 @@
     <div ref="partners" class="partners w-100 flex-column d-flex justify-content-center align-items-center">
       <div class="text-center font-weight-bold h3">НАШИ ПАРТНЁРЫ</div>
       <div class="container align-items-center">
-        <div class="row">
+        <div class="row align-items-center">
           <img class="col-md-4" src='@/assets/15efa96f4377a473c718553f02721b59 1.png' 
                 @error="$event.target.src = '@/assets/not-found.jpg'"/>
           <img class="col-md-4" src='@/assets/Лого_старый шрифт 1.png' 
