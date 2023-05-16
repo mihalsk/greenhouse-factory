@@ -5,7 +5,7 @@ SPA port 8080<br/>
 Rest API port 8000
 
 В App.vue(/vue/clie/src/) поменять "localhost" в строке 239:<br/>
-<i>const host = 'localhost:8000';</i><br/>
+<code>const host = 'localhost:8000';</code><br/>
 на свой ip адрес хоста Docker.<br/>
 По умолчанию docker поднимается с fastapi(peewee) бэкендом. Для изменения на flask(sqlalchemy) в файле docker-compose.yml закомментировать блок fastapi и раскоментировать блок api, а также в nginx.conf(/nginx/) закомментировать блок:
 <code>
