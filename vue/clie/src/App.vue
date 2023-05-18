@@ -385,8 +385,8 @@ export default {
 };
 </script>
 <style>
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 #app {
-  @import url('https://fonts.googleapis.com/css?family=Open+Sans');
   font-family: "Open Sans";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

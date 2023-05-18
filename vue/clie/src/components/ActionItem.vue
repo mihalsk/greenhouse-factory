@@ -1,13 +1,4 @@
 <template>
-  <!-- <div class="cs-border" :class="className" 
-      :width="width ? width : height ? false : 149"
-      :height="height ? height : false">
-    <img class="cs-img" :src="require(`../assets/${srcLink}`)"/>
-    <div class="cs-textblock">
-        <div class="cs-text">{{ text }}</div>
-        <div class="cs-link"><a @click="getModal">{{ linkText }}</a></div>
-    </div>
-  </div> -->
   <div class="cs-border" :class="className" 
       :width="width ? width : height ? false : 149"
       :height="height ? height : false">
