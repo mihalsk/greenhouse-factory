@@ -1,0 +1,13 @@
+#ym-map {
+    display: block;
+    max-width: 100%;
+    height: 500px;
+}
+@media only screen and (max-width: 768px) {
+    #ym-map {
+    display: block;
+    max-width: 100%;
+    align-self: center;
+    height: 200px;
+}
+}

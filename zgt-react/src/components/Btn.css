@@ -1,0 +1,30 @@
+.btn {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 15px;
+    width: 100%;
+    background: #319F01;
+    border-radius: 3px;
+  
+    /* btn/green */
+  
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1em;
+    line-height: 1em;
+  
+    /* white marshmallow */
+  
+    color: #FFFFFF;
+  
+  
+    /* Inside auto layout */
+  
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+  }

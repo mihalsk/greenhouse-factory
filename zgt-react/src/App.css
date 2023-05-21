@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+.App {
+  font-family: "Open Sans";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #000000;
+  margin-top: 30px;
+  font-smooth: always;
+}
+.cons{ 
+  background-image: url('./assets/banner.jpg');
+  background-size: cover;
+}
+.catalog{ 
+  background: #F2EFED;
+}
+.factory{ 
+  background-image: url('./assets/background-crab-1.png');
+  background-size: cover;
+  width: 75%;
+}
+.request{ 
+  background-image: url('./assets/background-.jpg');
+  background-size: cover;
+}
+.reviews{ 
+  background-image: url('./assets/background_review.png');
+  background-size: cover;
+  }
+.why .advantages {
+  background: #E5E5E5;
+}
+/* .map{
+  display: block;
+  max-width: 75%;
+   height: 500px;
+} */
+.plogo {
+  width: fit-content;
+  height: fit-content;
+}
+#player {
+  max-width: 100%;
+  height: 500px;
+}
+.base {
+  max-width: 75%;
+  width: 75%;
+}
+.base2 {
+  max-width: 55%;
+  width: 55%;
+}
+/* .footer .img {
+  width: 3em;
+} */
+@media only screen and (max-width: 768px) {
+  #player {
+    max-width: 100%;
+    height: auto;
+  }
+  .base {
+    /* width: 85%; */
+    max-width: 85%;
+  }
+}

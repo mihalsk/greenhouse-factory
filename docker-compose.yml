@@ -38,11 +38,17 @@ services:
     build: ./vue/clie
     container_name: clie
     restart: always
-    environment:
-      # - REACT_APP_API_HOST=127.0.0.1
-      - VUE_APP_API_HOST="127.0.0.1"
     expose:
       - 80
+
+  # ui:
+    # build: ./zgt-react
+    # container_name: react
+    # restart: always
+    # environment:
+      # - REACT_APP_API_HOST=127.0.0.1
+    # expose:
+      # - 80
 
   nginx:
     build: ./nginx

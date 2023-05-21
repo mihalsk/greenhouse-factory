@@ -236,7 +236,7 @@
 </template>
 
 <script>
-const host = `${process.env.VUE_APP_API_HOST}:8000`;
+//const host = `${this.api_host}:8000`;
 import Vue from 'vue'
 import axios from 'axios';
 import VueCookies from 'vue-cookies';
@@ -271,9 +271,10 @@ export default {
     Request
   },
   created() {
+    console.log(process.env.VUE_APP_API_HOST);
     axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
     axios
-      .get(`http://${host}/cities`)
+      .get(`http://${this.api_host}:8000/cities`)
       .then(response => {
         this.cities = response.data;
         this.city = this.cities.filter(obj => { return obj.id === this.cityid })[0];
@@ -285,7 +286,7 @@ export default {
       .finally(() => (this.citiesLoading = false));
 
     axios
-      .get(`http://${host}/goods`)
+      .get(`http://${this.api_host}:8000/goods`)
       .then(response => {
         this.goods = response.data;
       })
@@ -296,7 +297,7 @@ export default {
       .finally(() => (this.goodsLoading = false));
 
       axios
-      .get(`http://${host}/reviews`)
+      .get(`http://${this.api_host}:8000/reviews`)
       .then(response => {
         this.reviews = response.data;
       })
@@ -324,6 +325,7 @@ export default {
       goods: [],
       reviews: [],
       currentPreviewSrc: "",
+      api_host: process.env.VUE_APP_API_HOST
     };
   },
   watch: {

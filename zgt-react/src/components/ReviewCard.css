@@ -1,0 +1,20 @@
+.r-div {
+    background-color: white;
+    margin: 15px;
+    padding: 0;
+    border: 1px solid #CECECE;
+    border-radius: 10px;
+}
+.r-img {
+    width: 8em;
+    height: auto;
+    border-radius: 3px 3px 0 0;
+}
+
+@media only screen and (max-width: 768px) {
+    .r-img {
+        width: 5em;
+        height: auto;
+        border-radius: 3px 3px 0 0;
+    }
+}
