@@ -39,8 +39,8 @@ services:
     container_name: clie
     restart: always
     environment:
-      - REACT_APP_API_HOST=127.0.0.1
-      - VUE_APP_API_HOST=127.0.0.1
+      # - REACT_APP_API_HOST=127.0.0.1
+      - VUE_APP_API_HOST="127.0.0.1"
     expose:
       - 80
 
