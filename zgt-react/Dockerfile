@@ -3,6 +3,8 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
+ARG REACT_APP_API_HOST
+ENV REACT_APP_API_HOST $REACT_APP_API_HOST
 RUN npm run build
 
 FROM nginx:latest as production
