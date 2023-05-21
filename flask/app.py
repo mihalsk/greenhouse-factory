@@ -9,6 +9,9 @@ from models.Cities import Cities
 from models.Goods import Goods
 from models.Reviews import Reviews
 from utils.CommonJSONProvider import CommonJSONProvider
+import os
+
+HOST = os.getenv('DB_HOST', '127.0.0.1')
 # configuration
 DEBUG = True
 
@@ -16,7 +19,7 @@ DEBUG = True
 db = SQLAlchemy()
 app = Flask(__name__)
 app.json = CommonJSONProvider(app)
-engine = create_engine('mysql+pymysql://mihal:12345@db/zgtdb?charset=utf8mb4')
+engine = create_engine(f'mysql+pymysql://mihal:12345@{HOST}/zgtdb?charset=utf8mb4')
 sm = sessionmaker(bind=engine)
 # enable CORS
 CORS(app)

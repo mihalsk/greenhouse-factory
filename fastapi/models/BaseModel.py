@@ -1,7 +1,8 @@
 from peewee import MySQLDatabase, Model, IntegerField, DateTimeField, BooleanField, SQL
-
+import os
+HOST = os.getenv('DB_HOST', '127.0.0.1')
 mysql_db = MySQLDatabase('zgtdb', user='mihal', password='12345',
-                         host='db', port=3306, charset='utf8mb4')
+                         host=HOST, port=3306, charset='utf8mb4')
 
 
 class BaseModel(Model):

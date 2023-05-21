@@ -19,6 +19,8 @@ services:
     # restart: always
     # volumes:
       # - ./flask/:/app
+    # environment:
+      # - DB_HOST=db
     # expose:
       # - 5000
 
@@ -28,12 +30,17 @@ services:
     restart: always
     volumes:
       - ./fastapi/:/app
+    environment:
+      - DB_HOST=db
     expose:
       - 5000
   ui:
     build: ./vue/clie
     container_name: clie
     restart: always
+    environment:
+      - REACT_APP_API_HOST=127.0.0.1
+      - VUE_APP_API_HOST=127.0.0.1
     expose:
       - 80
 

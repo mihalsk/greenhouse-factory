@@ -236,8 +236,7 @@
 </template>
 
 <script>
-const host = 'localhost:8000';
-//const host = 'api:5000';
+const host = `${process.env.VUE_APP_API_HOST}:8000`;
 import Vue from 'vue'
 import axios from 'axios';
 import VueCookies from 'vue-cookies';
