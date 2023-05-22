@@ -42,8 +42,10 @@ function App() {
   const [reviewsErrored, setReviewsErrored] = useState(false);
   const [reviewsLoading, setReviewsLoading] = useState(true);
 
+  const [value, setValue] = useState(cookies.cityid);
   const cityChanged = e => {
     setCookie('cityid', e.target.value, { path: '/' });
+    setValue(e.target.value);
     setCity(cities.filter(obj => { return obj.id == e.target.value })[0])
   }
 
@@ -148,7 +150,7 @@ useEffect(() => {
                 handlerClose={ closeCityModal }
                 body={
                 <div>
-                  <select onChange={ cityChanged } value={ Number(cookies.cityid) }>
+                  <select onChange={ cityChanged } value={ Number(value) }>
                     {
                         Object.keys(cities).map((i) => ( 
                           <option key={ cities[i].id } value={ cities[i].id }>
