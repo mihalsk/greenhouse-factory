@@ -12,7 +12,7 @@ git clone ...<br/>
 В docker-compose.yml:<br/>
 - закоментировать ui блок ./vue/clie<br/>
 - раскоментировать ui блок ./zgt-react<br/>
-- прописать внешний ip docker в строке <code>REACT_APP_API_HOST='"127.0.0.1"'</code><br/>
+- в файле docker-compose.yml прописать внешний ip docker в строке <code>REACT_APP_API_HOST='"127.0.0.1"'</code><br/>
 
 По умолчанию docker поднимается с fastapi(peewee) бэкендом. Для изменения на flask(sqlalchemy) в файле docker-compose.yml закомментировать блок fastapi и раскоментировать блок api, а также в nginx.conf(/nginx/) закомментировать блок:
 <code>
@@ -43,7 +43,7 @@ Including react<br/>
 In docker-compose.yml:<br/>
 - comment out the ui block ./vue/clie<br/>
 - uncomment ui block ./zgt-react<br/>
-- write the external ip docker in the line <code>REACT_APP_API_HOST='"127.0.0.1"'</code><br/>
+- in file docker-compose.yml write the external ip docker in the line <code>REACT_APP_API_HOST='"127.0.0.1"'</code><br/>
 
 By default, docker comes up with a fastapi(peewee) backend. To change to flask(sqlalchemy) in the docker-compose.yml file, comment out the fastapi block and uncomment the api block, and also comment out the block in nginx.conf(/nginx/):
 <code>
