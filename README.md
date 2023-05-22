@@ -1,4 +1,4 @@
-# VUE/REACT SPA with rest api FastAPI(Peewee)/Flask(SQLAlchemy) backend 
+# Simple VUE/REACT SPA with rest api FastAPI(Peewee)/Flask(SQLAlchemy) backend 
 
 SPA port 8080<br/>
 Rest API port 8000
