@@ -32,12 +32,13 @@ async def cities_list():
 
 
 @app.get("/goods")
-async def goods_list():
-    query_result = Goods.select().where(Goods.is_active).dicts()
+async def goods_list(offset: int = 0, limit: int = 5):
+    query_result = Goods.select().offset(offset).limit(limit).where(Goods.is_active).dicts()
+    print(len(query_result))
     return JSONResponse(content=jsonable_encoder(list(query_result)))
 
 
 @app.get("/reviews")
-async def reviews_list():
-    query_result = Reviews.select().where(Reviews.is_active).dicts()
+async def reviews_list(offset: int = 0, limit: int = 5):
+    query_result = Reviews.select().offset(offset).limit(limit).where(Reviews.is_active).dicts()
     return JSONResponse(content=jsonable_encoder(list(query_result)))
