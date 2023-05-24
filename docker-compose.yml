@@ -4,7 +4,7 @@ services:
   db:
     image: mysql:latest
     volumes:
-      - ./flask/models:/docker-entrypoint-initdb.d
+      - ./db_dump:/docker-entrypoint-initdb.d
     restart: always
     environment:
       - MYSQL_USER=mihal
