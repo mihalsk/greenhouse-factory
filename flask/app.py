@@ -1,6 +1,6 @@
 from contextlib import contextmanager
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine, select
@@ -57,16 +57,20 @@ def cities_list():
 
 @app.route("/goods")
 def goods_list():
+    offset = request.args.get('offset', default=0, type=int)
+    limit = request.args.get('limit', default=5, type=int)
     with db_session(sm) as session:
-        query = select(Goods).order_by(Goods.id)
+        query = select(Goods).offset(offset).limit(limit).where(Goods.is_active).order_by(Goods.id)
         goods = session.scalars(query).all()
     return jsonify(goods)
 
 
 @app.route("/reviews")
 def reviews_list():
+    offset = request.args.get('offset', default=0, type=int)
+    limit = request.args.get('limit', default=5, type=int)
     with db_session(sm) as session:
-        query = select(Reviews).order_by(Reviews.id)
+        query = select(Reviews).offset(offset).limit(limit).where(Reviews.is_active).order_by(Reviews.id)
         reviews = session.scalars(query).all()
     return jsonify(reviews)
 
