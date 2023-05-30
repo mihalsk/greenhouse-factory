@@ -105,15 +105,14 @@ import Btn from '@/components/Btn';
 
 
   export default {
-    name: 'modal',
+    name: 'ModalWindow',
     props: {
-        cities: {
-            required: false,
-            type: Array
-        },
     },
     components: {
       Btn,
+    },
+    mounted() {
+      this.$root.$el.append(this.$el); // not recomended?
     },
     methods: {
       close() {

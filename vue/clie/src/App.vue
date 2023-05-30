@@ -16,8 +16,8 @@
       <div class="w-100 flex-column d-flex justify-content-center align-items-center">
         <div class="container row">
           <div class="col-md-4 flex-column d-flex justify-content-left p-5">
-            <div class="row font-weight-bold h3">КРАБ-СИСТЕМА</div>
-            <div class="row"><p>Для быстровозводимых<br/>каркасных конструкций</p></div>
+            <div class="row font-weight-bold h3 m-0 p-0">КРАБ-СИСТЕМА</div>
+            <div class="row m-0 p-0"><p>Для быстровозводимых<br/>каркасных конструкций</p></div>
             <btn :title="'Получить консультацию'" @action="showConsultationModal"/>
           </div>
         </div>
@@ -64,7 +64,7 @@
       
     </div>
 
-    <div  ref="catalog" class="catalog w-100 d-flex justify-content-center align-items-center flex-column">
+    <!-- <div  ref="catalog" class="catalog w-100 d-flex justify-content-center align-items-center flex-column">
       <div class="text-center font-weight-bold h3">ВСЕГДА В НАЛИЧИИ</div>
       <div class="d-flex justify-content-center align-items-center flex-row">
         <div class="container row">
@@ -72,6 +72,16 @@
           </Card>
         </div>
       </div>
+    </div> -->
+
+    <div  ref="catalog" class="catalog w-100 d-flex justify-content-center align-items-center flex-column">
+      <div class="text-center font-weight-bold h3">ВСЕГДА В НАЛИЧИИ</div>
+      <!-- <div class="d-flex justify-content-center align-items-center flex-row"> -->
+        <!-- <HScrollDiv>
+          
+        </HScrollDiv> -->
+      <!-- </div> -->
+      <catalog></catalog>
     </div>
 
     <div class="why w-100 d-flex justify-content-center align-items-center flex-column">
@@ -221,7 +231,7 @@
       </template>
     </ModalWindow>
 
-    <ModalWindow
+    <!-- <ModalWindow
       v-show="isPreviewModalVisible"
       @close="closePreviewModal">
       <template v-slot:body>
@@ -231,7 +241,7 @@
           </div>
         </div>
       </template>
-    </ModalWindow>
+    </ModalWindow> -->
   </div>
 </template>
 
@@ -254,8 +264,11 @@ import Card from '@/components/Card';
 import ReviewCard from '@/components/ReviewCard';
 import Request from '@/components/Request';
 
-Vue.use(VueCookies);
+import HScrollDiv from '@/components/HScrollDiv';
+import Catalog from './components/Catalog.vue';
 
+Vue.use(VueCookies);
+Vue.prototype.$apihost = process.env.VUE_APP_API_HOST;
 export default {
   name: 'App',
   components: {
@@ -268,13 +281,15 @@ export default {
     WhyItem,
     ModalWindow,
     ReviewCard,
-    Request
+    Request,
+    HScrollDiv,
+    Catalog
   },
   created() {
     console.log(process.env.VUE_APP_API_HOST);
     axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
     axios
-      .get(`http://${this.api_host}:8000/cities`)
+      .get(`http://${this.$apihost}:8000/cities`)
       .then(response => {
         this.cities = response.data;
         this.city = this.cities.filter(obj => { return obj.id === this.cityid })[0];
@@ -286,7 +301,7 @@ export default {
       .finally(() => (this.citiesLoading = false));
 
     axios
-      .get(`http://${this.api_host}:8000/goods`)
+      .get(`http://${this.$apihost}:8000/goods`)
       .then(response => {
         this.goods = response.data;
       })
@@ -297,7 +312,7 @@ export default {
       .finally(() => (this.goodsLoading = false));
 
       axios
-      .get(`http://${this.api_host}:8000/reviews`)
+      .get(`http://${this.$apihost}:8000/reviews`)
       .then(response => {
         this.reviews = response.data;
       })
@@ -325,7 +340,7 @@ export default {
       goods: [],
       reviews: [],
       currentPreviewSrc: "",
-      api_host: process.env.VUE_APP_API_HOST
+      //api_host: process.env.VUE_APP_API_HOST
     };
   },
   watch: {

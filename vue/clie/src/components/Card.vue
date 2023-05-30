@@ -1,8 +1,11 @@
 <template>
-  <div class="div d-flex justify-content-center align-items-center flex-column"
+  
+    <div class="сdiv d-flex justify-content-center align-items-center flex-column"
     :class="className">
     <!-- <div class="container column div"> -->
-      <img @click="imgClick" class="c-img" :src="`/static/${srcLink}`" @error="replaceByDefault">
+      <!-- <transition name="fade" mode="in-out"> -->
+        <img @click="imgClick" class="c-img" :src="this.imageLoading ? this.imgPlaceholder : `/static/${srcLink}`" @error="replaceByDefault" @load="imageLoading = false">
+      <!-- </transition> -->
       <div class="d-flex flex-column p-2">
         <div class="container row justify-content-start">
           <div class="col p-1">{{ name }}</div>
@@ -34,6 +37,12 @@
 
 <script>
 export default {
+  data() {
+    return  {
+      imageLoading: true,
+      imgPlaceholder: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAS4AAADCAQMAAADNf71NAAAAA1BMVEXm5uZLWILvAAAAHklEQVRYw+3BMQEAAADCIPunNsU+YAAAAAAAAAAEDh2OAAHLW9kmAAAAAElFTkSuQmCC"
+    };
+  },
   props: {
     className: {
       required: false,
@@ -62,7 +71,7 @@ export default {
   },
   methods: {
     replaceByDefault(e) {
-      e.target.src = require('../assets/not-found.jpg');
+      e.target.src = require('../assets/not-found-card.png');
     },
     imgClick() {
       this.$emit('imgClick', this.srcLink);
@@ -71,11 +80,13 @@ export default {
 }
 </script>
 <style scoped>
-.div {
+.сdiv {
   background-color: white;
   border-radius: 3px;
   margin: 15px;
   padding: 0;
+  /* width: 12em;
+  height: 18em; */
   box-shadow: 0px 5.10782px 11.4926px rgba(0, 0, 0, 0.15);
 }
 .c-img {
