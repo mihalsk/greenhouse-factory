@@ -29,10 +29,8 @@ async def root():
 
 @app.get("/cities")
 async def cities_list():
-    with mysql_db as db:
-        db.connect(reuse_if_open=True)
-        db.connection().ping()
-        query_result = Cities.select().where(Cities.is_active).dicts()
+    mysql_db.connection().ping(reconnect=True)
+    query_result = Cities.select().where(Cities.is_active).dicts()
     return JSONResponse(content=jsonable_encoder(list(query_result)))
 
 
@@ -46,10 +44,8 @@ async def goods_list(
                                     description="limit record count(SQL LIMIT), must be greater 0",
                                     gt=0,
                                     le=1000)] = 5):
-    with mysql_db as db:
-        db.connect(reuse_if_open=True)
-        db.connection().ping()
-        query_result = Goods.select().offset(offset).limit(limit).where(Goods.is_active).dicts()
+    mysql_db.connection().ping(reconnect=True)
+    query_result = Goods.select().offset(offset).limit(limit).where(Goods.is_active).dicts()
     return JSONResponse(content=jsonable_encoder(list(query_result)))
 
 
@@ -63,8 +59,6 @@ async def reviews_list(
                                     description="limit record count(SQL LIMIT), must be greater 0",
                                     gt=0,
                                     le=1000)] = 5):
-    with mysql_db as db:
-        db.connect(reuse_if_open=True)
-        db.connection().ping()
-        query_result = Reviews.select().offset(offset).limit(limit).where(Reviews.is_active).dicts()
+    mysql_db.connection().ping(reconnect=True)
+    query_result = Reviews.select().offset(offset).limit(limit).where(Reviews.is_active).dicts()
     return JSONResponse(content=jsonable_encoder(list(query_result)))

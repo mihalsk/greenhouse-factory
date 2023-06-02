@@ -19,5 +19,6 @@ class BaseModel(Model):
     created = DateTimeField(constraints=[SQL('DEFAULT CURRENT_TIMESTAMP')], null=False)
     updated = DateTimeField(constraints=[SQL('DEFAULT CURRENT_TIMESTAMP')], null=False)
     is_active = BooleanField(default=True, null=False)
+
     class Meta:
         database = mysql_db
